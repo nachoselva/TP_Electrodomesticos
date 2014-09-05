@@ -1,0 +1,10 @@
+1407719858880	Delete element
+1407726348304	Delete element
+1407729522038	Rename type 'JfrmPrincipal'
+1407730278667	Extract method 'activarBotonesElectrodomesticos'
+1407730566587	Change method 'desactivarBotonesParticulares'
+1407730578298	Change method 'activarBotonesElectrodomesticos'
+1407730597159	Rename method 'activarBotonesTelevisor'
+1407730607623	Rename method 'activarBotonesLavarropas'
+1407893394672	Infer generic type arguments
+1407894510545	Delete element

@@ -1,0 +1,115 @@
+package Logica;
+
+import java.util.ArrayList;
+
+import javax.swing.table.AbstractTableModel;
+
+import AccesoDatos.AccesoDatos_Electrodomestico;
+import Entidades.*;
+
+public class CustomDataModel extends AbstractTableModel{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ArrayList<Electrodomestico> Lista = new AccesoDatos_Electrodomestico().ObtenerTodos();
+	
+	public void setLista(ArrayList<Electrodomestico> lista) {
+		Lista = lista;
+	}
+
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return 9;
+	}
+
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return Lista.size();
+	}
+
+	@Override
+	public Object getValueAt(int arg0, int arg1) {
+		Electrodomestico item = Lista.get(arg0);
+		Object campo;
+		switch(arg1)
+		{
+		case 0: campo = item.getID();
+				break;
+		case 1: campo = item.getDescripcion();
+				break;
+		case 2: campo = item.getPrecio_base();
+				break;
+		case 3: campo = item.getConsumo();
+				break;
+		case 4: campo = item.getColor();
+				break;
+		case 5: campo = item.getPeso();
+				break;
+		case 6: if(item.getClass() == Lavarropas.class)
+				{
+					campo =((Lavarropas)item).getCarga();
+				}
+				else
+				{
+					campo = null;
+				}
+						
+				break;
+		case 7: if(item.getClass() == Television.class)
+				{
+				campo = ((Television)item).getResolucion();
+				}
+				else
+				{
+					campo = null;
+				}
+				break;
+		case 8: if(item.getClass() == Television.class)
+				{
+					campo = ((Television)item).isSinTDT();
+				}
+				else
+				{
+					campo = null;
+				}
+				break;
+		default: campo = null;
+				break;
+		}
+		return campo;
+	}
+	
+	@Override
+	public String getColumnName(int columna) {
+		String name = "";
+		switch(columna)
+		{
+		case 0: name = "ID";
+				break;
+		case 1: name = "Descripcion";
+				break;
+		case 2: name = "Precio Base";
+				break;
+		case 3: name = "Consumo";
+				break;
+		case 4: name = "Color";
+				break;
+		case 5: name = "Peso";
+				break;
+		case 6: name = "Carga";
+				break;
+		case 7: name = "Resolucion";
+				break;
+		case 8: name = "Sintonizador";
+				break;
+		default: name = null;
+				break;
+		}
+		return name;
+	}
+
+}

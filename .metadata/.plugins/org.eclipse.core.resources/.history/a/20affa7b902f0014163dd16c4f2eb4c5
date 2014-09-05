@@ -1,0 +1,55 @@
+package Ventanas;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+public class JfrmLista{
+
+	public JFrame frame;
+	private JTable tblListado;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JfrmLista window = new JfrmLista();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public JfrmLista() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 560, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		tblListado = new JTable();
+		for (int i = 0; i<tblListado.getColumnModel().getColumnCount(); i++)
+		{
+		tblListado.getColumnModel().getColumn(i).setPreferredWidth(30);
+		tblListado.getColumnModel().getColumn(i).setMinWidth(30);
+		tblListado.getColumnModel().getColumn(i).setMaxWidth(50);
+		}
+		tblListado.setBounds(10, 66, 524, 184);
+		frame.getContentPane().add(tblListado);
+	}
+}

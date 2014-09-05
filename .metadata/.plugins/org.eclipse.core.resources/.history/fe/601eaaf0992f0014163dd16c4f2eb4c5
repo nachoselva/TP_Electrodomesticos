@@ -1,0 +1,57 @@
+package Ventanas;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import Logica.CustomDataModel;
+import Logica.Logica_Electrodomestico;
+
+public class JfrmLista{
+
+	public JFrame frame;
+	private JTable tblListado;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JfrmLista window = new JfrmLista();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public JfrmLista() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 560, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		tblListado = new JTable();
+		tblListado.setBounds(10, 66, 524, 184);
+		frame.getContentPane().add(tblListado);
+		this.cargarTabla();
+	}
+	
+	private void cargarTabla()
+	{
+		CustomDataModel DataModel = new CustomDataModel();
+		DataModel.setLista(new Logica_Electrodomestico().ObtenerTodos());
+		tblListado.setModel(DataModel); 
+	}
+}

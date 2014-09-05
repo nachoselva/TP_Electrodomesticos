@@ -1,0 +1,112 @@
+package Ventanas;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTable;
+
+import Entidades.Electrodomestico.Colores;
+import Entidades.Electrodomestico.Tipos_Consumo;
+import Logica.CustomDataModel;
+import Logica.Logica_Electrodomestico;
+import Logica.Logica_Lavarropas;
+
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class JfrmLista{
+
+	public JFrame frame;
+	private JTable tblListado;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JfrmLista window = new JfrmLista();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public JfrmLista() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 657, 369);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(37, 72, 567, 203);
+		frame.getContentPane().add(scrollPane);
+		tblListado = new JTable();
+		tblListado.setCellSelectionEnabled(true);
+		tblListado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		scrollPane.setViewportView(tblListado);
+		
+		JButton btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnModificar.setBounds(254, 286, 89, 23);
+		frame.getContentPane().add(btnModificar);
+		
+		JButton btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				borrarElemento();
+			}
+		});
+		btnBorrar.setBounds(390, 286, 89, 23);
+		frame.getContentPane().add(btnBorrar);
+		this.cargarTabla();
+	}
+	
+	private void cargarTabla()
+	{
+		CustomDataModel DataModel = new CustomDataModel();
+		DataModel.setLista(new Logica_Electrodomestico().ObtenerTodos());
+		tblListado.setModel(DataModel); 
+	}
+	
+	private void borrarElemento() {
+		Logica_Electrodomestico adaptador = new Logica_Electrodomestico();
+		int _SelectRow = tblListado.getSelectedRow();
+		if(_SelectRow != -1)
+		{
+		int _Id = (int)tblListado.getValueAt(_SelectRow , 1);
+		adaptador.borrarItem(_Id);
+		this.cargarTabla();
+		}
+	}
+	
+	private void modificarLavarropas()
+	{
+		Logica_Lavarropas adaptador = new Logica_Lavarropas();
+		int _SelectRow = tblListado.getSelectedRow();
+		int _Id = (int)tblListado.getValueAt(_SelectRow , 1);
+		JfrmAlta a = new JfrmAlta(_Id);
+		this.cargarTabla();
+	}
+}

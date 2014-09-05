@@ -37,17 +37,7 @@ public class CustomDataModel extends AbstractTableModel{
 		Object campo;
 		switch(arg1)
 		{
-		case 0: {
-				campo = item.getClass();
-				if (item.getClass() == Television.class)
-				{
-					campo = "Television";
-				}
-				if (item.getClass() == Lavarropas.class)
-				{
-					campo = "Lavarropas";
-				}
-				}
+		case 0: campo = item.getClass();
 				break;
 		case 1: campo = item.getID();
 				break;

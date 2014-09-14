@@ -3,29 +3,29 @@ package Entidades;
 public abstract class Electrodomestico {
 	
 	private float precio_base;
-	private Colores color;
-	private Tipos_Consumo consumo;
+
+
+	private int colorID;
+	private int consumoID;
 	private float peso;
 	private String descripcion;
 	private int ID;
 	private boolean estado;
 	
 	static public int siguienteID;
-	static final Colores color_defecto = Colores.blanco;
+	static final int colorID_defecto = 1;
+	static final String colorDesc_defecto = "blanco";
 	static final float precio_base_defecto = 100;
-	static final Tipos_Consumo consumo_defecto = Tipos_Consumo.A;
+	static final int consumoID_defecto = 1;
 	static final float peso_defecto = 5;
 	static final boolean estado_defecto = true;
 	static final String descripcion_defecto = "sin descripcion";
 	
-	public enum Colores { blanco, negro, rojo, azul, gris}
-	public enum Tipos_Consumo { A, B, C, D, E, F}
-	
-	public Electrodomestico (boolean _estado, float _precio_base,float _peso , Colores _color, Tipos_Consumo _consumo, String _descripcion)
+	public Electrodomestico (boolean _estado, float _precio_base,float _peso , int _colorID, int _consumoID, String _descripcion)
 	{
 		this.precio_base = _precio_base;
-		this.color = _color;
-		this.consumo = _consumo;
+		this.colorID = _colorID;
+		this.consumoID = _consumoID;
 		this.peso = _peso;
 		this.ID = Electrodomestico.siguienteID;
 		this.descripcion = _descripcion;
@@ -36,13 +36,13 @@ public abstract class Electrodomestico {
 	
 	public Electrodomestico () 
 	{
-		this(estado_defecto, precio_base_defecto, peso_defecto, color_defecto, consumo_defecto, descripcion_defecto);
+		this(estado_defecto, precio_base_defecto, peso_defecto, colorID_defecto, consumoID_defecto, descripcion_defecto);
 		
 	}
 	
 	public Electrodomestico (float _precio_base, float _peso) 
 	{
-		this(estado_defecto, _precio_base, _peso, color_defecto, consumo_defecto, descripcion_defecto);
+		this(estado_defecto, _precio_base, _peso, colorID_defecto, consumoID_defecto, descripcion_defecto);
 	}
 	
 
@@ -74,20 +74,39 @@ public abstract class Electrodomestico {
 	public float getPrecio_base() {
 		return precio_base;
 	}
-	public Colores getColor() {
-		return color;
+	public int getColorID() {
+		return colorID;
 	}
-	public Tipos_Consumo getConsumo() {
-		return consumo;
+	public int getConsumoID() {
+		return consumoID;
 	}
 	public float getPeso() {
 		return peso;
 	}
 	
+	public void setPrecio_base(float precio_base) {
+		this.precio_base = precio_base;
+	}
+
+
+	public void setColorID(int colorID) {
+		this.colorID = colorID;
+	}
+
+
+	public void setConsumoID(int consumoID) {
+		this.consumoID = consumoID;
+	}
+
+
+	public void setPeso(float peso) {
+		this.peso = peso;
+	}
+	
 	public float precioFinal()
 	{
 		float acumulador = this.precio_base;
-		switch(this.consumo.toString().charAt(0))
+		/*switch(this.consumo.toString().charAt(0))
 		{
 		case 'A':
 			acumulador += 100;
@@ -123,7 +142,7 @@ public abstract class Electrodomestico {
 		else
 		{
 			acumulador += 100;
-		}
+		}*/
 		
 		return this.precio_base + acumulador;
 	}

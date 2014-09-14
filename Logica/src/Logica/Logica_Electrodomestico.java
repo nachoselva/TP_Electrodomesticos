@@ -18,5 +18,20 @@ public class Logica_Electrodomestico {
 		AccesoDatos_Electrodomestico adaptador = new AccesoDatos_Electrodomestico();
 		adaptador.borrarItem(_Id);
 	}
+	
+	public ArrayList<String> getTodosConsumos()
+	{
+		return new AccesoDatos_Electrodomestico().getTodosConsumos();
+	}
+	
+	public ArrayList<String> getTodosColores()
+	{
+		return new AccesoDatos_Electrodomestico().getTodosColores();
+	}
+	
+	public Electrodomestico obtenerItem(int _Id)
+	{
+		return new AccesoDatos_Electrodomestico().obtenerItem(_Id);
+	}
 
 }

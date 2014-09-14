@@ -1,23 +1,20 @@
 package Logica;
 import AccesoDatos.*;
-import Entidades.Electrodomestico.Colores;
-import Entidades.Electrodomestico.Tipos_Consumo;
 import Entidades.Lavarropas;
 
 public class Logica_Lavarropas  {
 
-	public void guardarLavarropas(boolean _estado, float _precio_base,float _peso , Colores _color, Tipos_Consumo _consumo, String _descripcion, float _carga)
+	public int guardarLavarropas(boolean _estado, float _precio_base,float _peso , int _colorID, int _consumoID, String _descripcion, float _carga)
 	{
-		AccesoDatos_Electrodomestico adaptador = new AccesoDatos_Electrodomestico();
-		Lavarropas lav = new Lavarropas(_estado, _precio_base, _peso, _color, _consumo, _descripcion, _carga);
-		adaptador.GuardarElectrodomestico(lav);
+		AccesoDatos_Lavarropas adaptador = new AccesoDatos_Lavarropas();
+		Lavarropas lav = new Lavarropas(_estado, _precio_base, _peso, _colorID, _consumoID, _descripcion, _carga);
+		return adaptador.GuardarElectrodomestico(lav);
 	}
 	
-	public void actualizarLavarropas(int _Id, boolean _estado, float _precio_base,float _peso , Colores _color, Tipos_Consumo _consumo, String _descripcion, float _carga)
+	public void actualizarLavarropas(int _Id, boolean _estado, float _precio_base,float _peso , int _colorID, int _consumoID, String _descripcion, float _carga)
 	{
-		AccesoDatos_Electrodomestico adaptador = new AccesoDatos_Electrodomestico();
-		Lavarropas lav = new Lavarropas(_Id, _estado, _precio_base, _peso, _color, _consumo, _descripcion, _carga);
-		lav.setID(_Id);
-		adaptador.GuardarElectrodomestico(lav);
+		AccesoDatos_Lavarropas adaptador = new AccesoDatos_Lavarropas();
+		Lavarropas lav = new Lavarropas(_Id, _estado, _precio_base, _peso, _colorID, _consumoID, _descripcion, _carga);
+		adaptador.actualizarElectrodomestico(_Id, lav);
 	}
 }

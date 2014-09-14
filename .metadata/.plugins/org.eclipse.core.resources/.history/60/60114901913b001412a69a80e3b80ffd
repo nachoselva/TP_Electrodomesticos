@@ -1,0 +1,128 @@
+package AccesoDatos;
+
+import java.sql.*;
+import java.util.ArrayList;
+import com.mysql.jdbc.Driver;
+import Entidades.*;
+
+public class AccesoDatos_Electrodomestico {
+static protected ArrayList<Electrodomestico> ListaElectrodomesticos;
+	
+	public AccesoDatos_Electrodomestico()
+	{
+		if (ListaElectrodomesticos == null)
+		{
+		ListaElectrodomesticos = new ArrayList<Electrodomestico>();
+		Lavarropas lav1 = new Lavarropas(true, 50, 10, 2, 3, "lavarropas 1",  150);
+		ListaElectrodomesticos.add(lav1);
+		Electrodomestico.siguienteID++;
+		Lavarropas lav2 = new Lavarropas(false, 60, 45, 1, 4, "lavarropas 2", 80);
+		ListaElectrodomesticos.add(lav2);
+		Electrodomestico.siguienteID++;
+		Television tel1 = new Television(true, 70, 20, 2, 3, "televisor 1", 20, true);
+		ListaElectrodomesticos.add(tel1);
+		Electrodomestico.siguienteID++;
+		Television tel2 = new Television(true, 100, 200, 2, 2, "televisor 2", 10, false);
+		ListaElectrodomesticos.add(tel2);
+		Electrodomestico.siguienteID++;
+		}
+	}
+	
+	public void GuardarElectrodomestico (Electrodomestico item)
+	{
+		boolean nuevoElemento = true;
+		Electrodomestico aBorrar = null;
+		for(int x = 0; x< ListaElectrodomesticos.size(); x++)
+		{
+			if(ListaElectrodomesticos.get(x).getID() == item.getID())
+			{
+				nuevoElemento = false;
+				aBorrar = ListaElectrodomesticos.get(x);
+				break;
+			}
+		}
+		if (nuevoElemento)
+		{
+		ListaElectrodomesticos.add(item);
+		Electrodomestico.siguienteID++;
+		}
+		else
+		{
+		ListaElectrodomesticos.remove(aBorrar);
+		ListaElectrodomesticos.add(item);
+		}
+	}
+	
+	public ArrayList<Electrodomestico> ObtenerTodos() 
+	{
+		ArrayList<Electrodomestico> listado = new ArrayList<Electrodomestico>();
+		String consulta = "select * from db_electrodomesticos";
+		Statement  sentencia = null;
+		ResultSet  rs = null;
+		try{
+		sentencia = AdaptadorConeccion.getInstancia().getConn().createStatement();
+		rs = sentencia.executeQuery(consulta);
+		while(rs.next())
+			{
+				if(rs.getInt("clase") == 1)
+				{
+					Lavarropas lav = new Lavarropas();
+					lav.setID(rs.getInt("idElectrodomestico"));
+					lav.setDescripcion(rs.getString("descripcion"));
+					lav.setPrecio_base(rs.getFloat("precio_base"));
+					lav.setPeso(rs.getFloat("peso"));
+					lav.setColorID(rs.getInt("idColor"));
+					lav.setConsumoID(rs.getInt("idConsumo"));
+					lav.setCarga(rs.getFloat("carga"));
+					listado.add(lav);
+				}
+				else if(rs.getInt("clase") == 2)
+				{
+					Television tel = new Television();
+					tel.setID(rs.getInt("idElectrodomestico"));
+					tel.setDescripcion(rs.getString("descripcion"));
+					tel.setPrecio_base(rs.getFloat("precio_base"));
+					tel.setPeso(rs.getFloat("peso"));
+					tel.setColorID(rs.getInt("idColor"));
+					tel.setConsumoID(rs.getInt("idConsumo"));
+					tel.setSinTDT(rs.getBoolean("sintonizador"));
+					tel.setResolucion(rs.getInt("resolucion"));
+					listado.add(tel);
+				}
+			}
+		}
+		catch (SQLException a)
+		{
+			
+		}
+		return listado;
+		
+	}
+	
+	public int obtenerID()
+	{
+		return ListaElectrodomesticos.size();
+	}
+	
+	public Electrodomestico obtenerPrimerItem(int _Id)
+	{
+		Electrodomestico item = null;
+		for(int x = 0; x< ListaElectrodomesticos.size(); x++)
+		{
+			if(ListaElectrodomesticos.get(x).getID() == _Id)
+			{
+				item = ListaElectrodomesticos.get(x);
+				break;
+			}
+		}
+		return item;
+	}
+	
+	public void borrarItem(int _Id)
+	{
+		ListaElectrodomesticos.remove(obtenerPrimerItem(_Id));
+	}
+	
+	
+	
+}

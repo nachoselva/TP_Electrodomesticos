@@ -4,15 +4,18 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
+
+import Entidades.Electrodomestico;
 import Logica.CustomDataModel;
 import Logica.Logica_Electrodomestico;
+
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowFocusListener;
-import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class JfrmLista{
 
@@ -47,13 +50,6 @@ public class JfrmLista{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.addWindowFocusListener(new WindowFocusListener() {
-			public void windowGainedFocus(WindowEvent arg0) {
-				cargarTabla();
-			}
-			public void windowLostFocus(WindowEvent arg0) {
-			}
-		});
 		frame.setBounds(100, 100, 657, 369);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -94,13 +90,22 @@ public class JfrmLista{
 		});
 		btnAlta.setBounds(110, 286, 89, 23);
 		frame.getContentPane().add(btnAlta);
-		this.cargarTabla();
+		
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cargarTabla();
+			}
+		});
+		btnActualizar.setBounds(235, 11, 89, 23);
+		frame.getContentPane().add(btnActualizar);
 	}
 	
 	private void cargarTabla()
 	{
 		CustomDataModel DataModel = new CustomDataModel();
-		DataModel.setLista(new Logica_Electrodomestico().ObtenerTodos());
+		ArrayList<Electrodomestico> a = new Logica_Electrodomestico().ObtenerTodos();
+		DataModel.setLista(a);
 		tblListado.setModel(DataModel); 
 	}
 	

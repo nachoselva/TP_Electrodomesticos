@@ -1,0 +1,21 @@
+package Logica;
+import AccesoDatos.*;
+import Entidades.Lavarropas;
+
+public class Logica_Lavarropas  {
+
+	public void guardarLavarropas(boolean _estado, float _precio_base,float _peso , int _colorID, int _consumoID, String _descripcion, float _carga)
+	{
+		AccesoDatos_Electrodomestico adaptador = new AccesoDatos_Electrodomestico();
+		Lavarropas lav = new Lavarropas(_estado, _precio_base, _peso, _colorID, _consumoID, _descripcion, _carga);
+		adaptador.GuardarElectrodomestico(lav);
+	}
+	
+	public void actualizarLavarropas(int _Id, boolean _estado, float _precio_base,float _peso , int _colorID, int _consumoID, String _descripcion, float _carga)
+	{
+		AccesoDatos_Electrodomestico adaptador = new AccesoDatos_Electrodomestico();
+		Lavarropas lav = new Lavarropas(_Id, _estado, _precio_base, _peso, _colorID, _consumoID, _descripcion, _carga);
+		lav.setID(_Id);
+		adaptador.GuardarElectrodomestico(lav);
+	}
+}

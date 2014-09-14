@@ -3,8 +3,6 @@ package Logica;
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
-
-import AccesoDatos.AccesoDatos_Electrodomestico;
 import Entidades.*;
 
 public class CustomDataModel extends AbstractTableModel{
@@ -13,7 +11,7 @@ public class CustomDataModel extends AbstractTableModel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Electrodomestico> Lista = new AccesoDatos_Electrodomestico().ObtenerTodos();
+	private ArrayList<Electrodomestico> Lista;
 	
 	public void setLista(ArrayList<Electrodomestico> lista) {
 		Lista = lista;
@@ -55,9 +53,9 @@ public class CustomDataModel extends AbstractTableModel{
 				break;
 		case 3: campo = item.getPrecio_base();
 				break;
-		case 4: campo = item.getConsumo();
+		case 4: campo = item.getConsumoID();
 				break;
-		case 5: campo = item.getColor();
+		case 5: campo = item.getColorID();
 				break;
 		case 6: campo = item.getPeso();
 				break;
@@ -110,9 +108,9 @@ public class CustomDataModel extends AbstractTableModel{
 				break;
 		case 3: name = "Precio Base";
 				break;
-		case 4: name = "Consumo";
+		case 4: name = "ConsumoID";
 				break;
-		case 5: name = "Color";
+		case 5: name = "ColorID";
 				break;
 		case 6: name = "Peso";
 				break;

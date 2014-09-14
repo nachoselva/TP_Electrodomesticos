@@ -1,10 +1,5 @@
 package Ventanas;
 
-import java.awt.EventQueue;
-
-
-
-
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,8 +11,9 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 import Entidades.Electrodomestico;
-import Entidades.Electrodomestico.Colores;
-import Entidades.Electrodomestico.Tipos_Consumo;
+import Entidades.Lavarropas;
+import Entidades.Television;
+import Logica.Logica_Electrodomestico;
 import Logica.Logica_Lavarropas;
 import Logica.Logica_Televisor;
 
@@ -28,6 +24,7 @@ import javax.swing.JLabel;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.util.ArrayList;
 
 import javax.swing.JTextPane;
 
@@ -39,8 +36,8 @@ public class JfrmAlta {
 	private JTextField txtCarga;
 	private JTextField txtResolucion;
 	private JCheckBox chbSintonizadorTDT;
-	private JComboBox<Colores> cboxColores;
-	private JComboBox<Tipos_Consumo> cboxConsEner;
+	private JComboBox<String> cboxColores;
+	private JComboBox<String> cboxConsEner;
 	private JRadioButton rbtnLavarropas;
 	private JRadioButton rbtnTelevision;
 	private JButton btnAlta;
@@ -50,6 +47,8 @@ public class JfrmAlta {
 	private JTextField txtID;
 	private JLabel lblID;
 	private JButton btnCerrar;
+	private ArrayList<String> colores = new Logica_Electrodomestico().getTodosColores();
+	private ArrayList<String> consumos = new Logica_Electrodomestico().getTodosConsumos();
 
 	/**
 	 * Launch the application.
@@ -77,6 +76,7 @@ public class JfrmAlta {
 	}
 	
 	public JfrmAlta(int _Id) {
+		
 		initialize();
 		txtID = new JTextField();
 		txtID.setEnabled(false);
@@ -98,6 +98,24 @@ public class JfrmAlta {
 		btnActualizar.setEnabled(true);
 		btnActualizar.setBounds(10, 353, 100, 23);
 		frame.getContentPane().add(btnActualizar);
+		Electrodomestico item = new Logica_Electrodomestico().obtenerItem(_Id);
+		this.txtPrecioBase.setText(String.valueOf(item.getPrecio_base()));
+		this.txtPeso.setText(String.valueOf(item.getPeso()));
+		this.cboxColores.setSelectedIndex(item.getColorID());
+		this.cboxConsEner.setSelectedIndex(item.getConsumoID());
+		this.txtpDescrpcion.setText(item.getDescripcion());
+		this.chbEstado.setSelected(item.getEstado());
+		if(item.getClass() == Television.class)
+		{
+			this.txtResolucion.setText(String.valueOf(((Television)item).getResolucion()));
+			this.chbSintonizadorTDT.setSelected((((Television)item).isSinTDT()));
+		}
+		else if (item.getClass() == Lavarropas.class)
+		{
+			this.txtCarga.setText(String.valueOf(((Lavarropas)item).getCarga()));
+		}
+		
+		
 	}
 
 	/**
@@ -172,15 +190,18 @@ public class JfrmAlta {
 		
 		
 		
-		cboxColores = new JComboBox<Colores>();
+		cboxColores = new JComboBox<String>();
 		cboxColores.setEnabled(false);
-		cboxColores.setModel(new DefaultComboBoxModel<Colores>(Colores.values()));
+		String[] colores_array = colores.toArray(new String[colores.size()]);
+		cboxColores.setModel(new DefaultComboBoxModel<String>(colores_array));
 		cboxColores.setBounds(107, 202, 86, 23);
 		frame.getContentPane().add(cboxColores);
 		
-		cboxConsEner = new JComboBox<Tipos_Consumo>();
+		
+		cboxConsEner = new JComboBox<String>();
 		cboxConsEner.setEnabled(false);
-		cboxConsEner.setModel(new DefaultComboBoxModel<Tipos_Consumo>(Tipos_Consumo.values()));
+		String[] consumos_array = consumos.toArray(new String[consumos.size()]);
+		cboxConsEner.setModel(new DefaultComboBoxModel<String>(consumos_array));
 		cboxConsEner.setBounds(138, 257, 55, 20);
 		frame.getContentPane().add(cboxConsEner);
 		
@@ -242,17 +263,16 @@ public class JfrmAlta {
 		Logica_Lavarropas adaptador = new Logica_Lavarropas();
 		float _precioBase = Float.parseFloat(this.txtPrecioBase.getText());
 		float _peso = Float.parseFloat(this.txtPeso.getText());
-		Colores _color = (Colores)this.cboxColores.getSelectedItem();
-		Tipos_Consumo _consumo = (Tipos_Consumo)this.cboxConsEner.getSelectedItem();
+		int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
+		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) +1;
 		float _carga = Float.parseFloat(this.txtCarga.getText());
 		String _descripcion = this.txtpDescrpcion.getText();
 		boolean _estado = this.chbEstado.isSelected();
-		adaptador.guardarLavarropas(_estado, _precioBase, _peso, _color, _consumo, _descripcion, _carga);
-		String mensaje = String.format("Item Correctamente Cargado \n%s \nID: %s \nDescripcion: %s \n"
+		int _id =adaptador.guardarLavarropas(_estado, _precioBase, _peso, _colorID, _consumoID, _descripcion, _carga);
+		String mensaje = String.format("Item Correctamente Cargado \nID: %s \nDescripcion: %s \n"
 				+ "Precio Base: %s \nPeso: %s \nColor: %s \nConsumo: %s\nEstado: %s\nCarga: %s", 
-				"Lavarropas",Electrodomestico.siguienteID-1, _descripcion, _precioBase, _peso, _color, _consumo, _estado, _carga);
+				"Lavarropas",_id, _descripcion, _precioBase, _peso, _colorID, _consumoID, _estado, _carga);
 		JOptionPane.showMessageDialog(this.frame, mensaje, "Titulo", 1);
-		
 	}
 	
 	private void guardarTelevision()
@@ -260,17 +280,17 @@ public class JfrmAlta {
 		Logica_Televisor adaptador = new Logica_Televisor();
 		float _precioBase = Float.parseFloat(this.txtPrecioBase.getText());
 		float _peso = Float.parseFloat(this.txtPeso.getText());
-		Colores _color = (Colores)this.cboxColores.getSelectedItem();
-		Tipos_Consumo _consumo = (Tipos_Consumo)this.cboxConsEner.getSelectedItem();
+		int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
+		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
 		String _descripcion = this.txtpDescrpcion.getText();
 		boolean _estado = this.chbEstado.isSelected();
 		int _resolucion = Integer.parseInt(this.txtResolucion.getText());
 		boolean _sinTDT = this.chbSintonizadorTDT.isSelected();
-		adaptador.guardarTelevisor(_estado, _precioBase, _peso, _color, _consumo, _descripcion, _resolucion, _sinTDT);
-		String mensaje = String.format("Item Correctamente Cargado \n%s \nID: %s \nDescripcion: %s \n"
-				+ "%s\nPrecio Base: %s \nPeso: %s \nColor: %s \nConsumo: %s\nEstado: %s\n"
+		int _id = adaptador.guardarTelevisor(_estado, _precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sinTDT);
+		String mensaje = String.format("Item Correctamente Cargado \n%s\nID: %s \nDescripcion: %s \n"
+				+ "Precio Base: %s \nPeso: %s \nColor: %s \nConsumo: %s\nEstado: %s\n"
 				+ "Resolucion: %s \nSintonizador: %s\n", 
-				"Television", Electrodomestico.siguienteID-1, _descripcion, _precioBase, _peso, _color, _consumo, _estado, _resolucion, _sinTDT);
+				"Television", _id, _descripcion, _precioBase, _peso, (String)this.cboxColores.getSelectedItem(), (String)this.cboxConsEner.getSelectedItem(), _estado, _resolucion, _sinTDT);
 		JOptionPane.showMessageDialog(this.frame, mensaje, "Titulo", 1);
 	}
 	
@@ -324,13 +344,13 @@ public class JfrmAlta {
 		int _Id = Integer.parseInt(this.txtID.getText());
 		float _precioBase = Float.parseFloat(this.txtPrecioBase.getText());
 		float _peso = Float.parseFloat(this.txtPeso.getText());
-		Colores _color = (Colores)this.cboxColores.getSelectedItem();
-		Tipos_Consumo _consumo = (Tipos_Consumo)this.cboxConsEner.getSelectedItem();
+		int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
+		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
 		String _descripcion = this.txtpDescrpcion.getText();
 		boolean _estado = this.chbEstado.isSelected();
 		int _resolucion = Integer.parseInt(this.txtResolucion.getText());
 		boolean _sinTDT = this.chbSintonizadorTDT.isSelected();
-		adaptador.actualizarTelevisor(_Id, _estado, _precioBase, _peso, _color, _consumo, _descripcion, _resolucion, _sinTDT);
+		adaptador.actualizarTelevisor(_Id, _estado, _precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sinTDT);
 		this.frame.setVisible(false);
 	}
 
@@ -339,12 +359,12 @@ public class JfrmAlta {
 		int _Id = Integer.parseInt(this.txtID.getText());
 		float _precioBase = Float.parseFloat(this.txtPrecioBase.getText());
 		float _peso = Float.parseFloat(this.txtPeso.getText());
-		Colores _color = (Colores)this.cboxColores.getSelectedItem();
-		Tipos_Consumo _consumo = (Tipos_Consumo)this.cboxConsEner.getSelectedItem();
+		int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
+		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
 		String _descripcion = this.txtpDescrpcion.getText();
 		boolean _estado = this.chbEstado.isSelected();
 		float _carga = Float.parseFloat(this.txtCarga.getText());
-		adaptador.actualizarLavarropas(_Id, _estado, _precioBase, _peso, _color, _consumo, _descripcion, _carga);
+		adaptador.actualizarLavarropas(_Id, _estado, _precioBase, _peso, _colorID, _consumoID, _descripcion, _carga);
 		this.frame.setVisible(false);
 	}
 }

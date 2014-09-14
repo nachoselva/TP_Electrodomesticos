@@ -20,7 +20,7 @@ public class CustomDataModel extends AbstractTableModel{
 	@Override
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
-		return 11;
+		return 10;
 	}
 
 	@Override
@@ -87,8 +87,6 @@ public class CustomDataModel extends AbstractTableModel{
 					campo = null;
 				}
 				break;
-		case 10: campo = item.getEstado();
-				break;
 		default: campo = null;
 				break;
 		}
@@ -119,8 +117,6 @@ public class CustomDataModel extends AbstractTableModel{
 		case 8: name = "Resolucion";
 				break;
 		case 9: name = "Sintonizador";
-				break;
-		case 10: name = "estado";
 				break;
 		default: name = null;
 				break;

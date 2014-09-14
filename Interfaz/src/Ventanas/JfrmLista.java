@@ -58,7 +58,6 @@ public class JfrmLista{
 		scrollPane.setBounds(37, 72, 567, 203);
 		frame.getContentPane().add(scrollPane);
 		tblListado = new JTable();
-		tblListado.setCellSelectionEnabled(true);
 		tblListado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		scrollPane.setViewportView(tblListado);
@@ -97,7 +96,7 @@ public class JfrmLista{
 				cargarTabla();
 			}
 		});
-		btnActualizar.setBounds(235, 11, 89, 23);
+		btnActualizar.setBounds(37, 11, 100, 28);
 		frame.getContentPane().add(btnActualizar);
 	}
 	

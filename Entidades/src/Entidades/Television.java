@@ -4,24 +4,24 @@ public class Television extends Electrodomestico {
 	private int resolucion;
 	private boolean sinTDT;
 	
-	static final int resolucion_defecto = 20;
-	static final boolean sinTDT_defecto = false;
+	static final public int resolucion_defecto = 20;
+	static final public boolean sinTDT_defecto = false;
 	
-	public Television(boolean _estado, float _precio_base,float _peso , int _colorID, int _consumoID, String _descripcion, int _resolucion, boolean _sinTDT)
+	public Television( float _precio_base,float _peso , int _colorID, int _consumoID, String _descripcion, int _resolucion, boolean _sinTDT)
 	{
-		super(_estado, _precio_base, _peso, _colorID, _consumoID, _descripcion);
+		super( _precio_base, _peso, _colorID, _consumoID, _descripcion);
 		this.resolucion = _resolucion;
 		this.sinTDT = _sinTDT;
 	}
 	
 	public Television(float _precio_base,float _peso, String _descripcion)
 	{
-		this(estado_defecto, _precio_base, _peso, colorID_defecto, consumoID_defecto,descripcion_defecto, resolucion_defecto, sinTDT_defecto);
+		this( _precio_base, _peso, colorID_defecto, consumoID_defecto,descripcion_defecto, resolucion_defecto, sinTDT_defecto);
 	}
 	
 	public Television()
 	{
-		this( estado_defecto, precio_base_defecto, peso_defecto, colorID_defecto, 
+		this(precio_base_defecto, peso_defecto, colorID_defecto, 
 				consumoID_defecto, descripcion_defecto, resolucion_defecto, sinTDT_defecto );
 	}
 	

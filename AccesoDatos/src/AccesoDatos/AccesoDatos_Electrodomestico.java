@@ -8,11 +8,6 @@ import Entidades.*;
 public class AccesoDatos_Electrodomestico {
 static protected ArrayList<Electrodomestico> ListaElectrodomesticos;
 	
-	public void actualizarElectrodomestico()
-	{
-		
-	}
-	
 	public String getColorDesc(int ID)
 	{
 		String consulta = "select descripcion from colores where idcolor = ?";

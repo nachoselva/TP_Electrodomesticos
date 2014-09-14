@@ -21,8 +21,8 @@
 <fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Television"/>
 <fullyQualifiedTypeName name="Logica.Logica_Electrodomestico"/>
 <fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Electrodomestico"/>
-<fullyQualifiedTypeName name="Entidades.Electrodomestico"/>
 <fullyQualifiedTypeName name="Entidades.Television"/>
-<fullyQualifiedTypeName name="Entidades.Lavarropas"/>
 <fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Lavarropas"/>
+<fullyQualifiedTypeName name="Entidades.Lavarropas"/>
+<fullyQualifiedTypeName name="Entidades.Electrodomestico"/>
 </qualifiedTypeNameHistroy>

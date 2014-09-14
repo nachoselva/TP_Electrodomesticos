@@ -3,10 +3,7 @@ package AccesoDatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
-import Entidades.Electrodomestico;
 import Entidades.Lavarropas;
-import Entidades.Television;
 
 public class AccesoDatos_Lavarropas extends AccesoDatos_Electrodomestico{
 	public int GuardarElectrodomestico(Lavarropas item)
@@ -39,7 +36,7 @@ public class AccesoDatos_Lavarropas extends AccesoDatos_Electrodomestico{
 	
 	public void actualizarElectrodomestico(int _Id, Lavarropas lav)
 	{
-		String consulta = "UPDATE electrodomesticos SET precio_base=?,peso=?,descripcion=?,idColor=?,idConsumo=?,carga=? WHERE idElectrodomestico=?";
+		String consulta = "UPDATE electrodomesticos SET precio_base=?,peso=?,descripcion=?,idColor=?,idConsumo=?,carga=?, clase=1 WHERE idElectrodomestico=?";
 		PreparedStatement  sentencia = null;
 		try{
 		sentencia = AdaptadorConeccion.getInstancia().getConn().prepareStatement(consulta);

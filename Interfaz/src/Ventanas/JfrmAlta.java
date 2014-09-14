@@ -101,18 +101,25 @@ public class JfrmAlta {
 		Electrodomestico item = new Logica_Electrodomestico().obtenerItem(_Id);
 		this.txtPrecioBase.setText(String.valueOf(item.getPrecio_base()));
 		this.txtPeso.setText(String.valueOf(item.getPeso()));
-		this.cboxColores.setSelectedIndex(item.getColorID());
-		this.cboxConsEner.setSelectedIndex(item.getConsumoID());
+		this.cboxColores.setSelectedIndex(item.getColorID()-1);
+		this.cboxConsEner.setSelectedIndex(item.getConsumoID()-1);
 		this.txtpDescrpcion.setText(item.getDescripcion());
-		this.chbEstado.setSelected(item.getEstado());
 		if(item.getClass() == Television.class)
 		{
 			this.txtResolucion.setText(String.valueOf(((Television)item).getResolucion()));
 			this.chbSintonizadorTDT.setSelected((((Television)item).isSinTDT()));
+			this.rbtnLavarropas.setSelected(false);
+			this.rbtnTelevision.setSelected(true);
+			this.rbtnTelevision.setEnabled(false);
+			this.rbtnLavarropas.setEnabled(false);
 		}
 		else if (item.getClass() == Lavarropas.class)
 		{
 			this.txtCarga.setText(String.valueOf(((Lavarropas)item).getCarga()));
+			this.rbtnLavarropas.setSelected(true);
+			this.rbtnTelevision.setSelected(false);
+			this.rbtnTelevision.setEnabled(false);
+			this.rbtnLavarropas.setEnabled(false);
 		}
 		
 		
@@ -253,45 +260,83 @@ public class JfrmAlta {
 		btnCerrar.setBounds(332, 353, 89, 23);
 		frame.getContentPane().add(btnCerrar);
 		
-		
-		
-		
 	}
 	
 	private void guardarLavarropas()
 	{
 		Logica_Lavarropas adaptador = new Logica_Lavarropas();
-		float _precioBase = Float.parseFloat(this.txtPrecioBase.getText());
-		float _peso = Float.parseFloat(this.txtPeso.getText());
+		String _precioBase = this.txtPrecioBase.getText();
+		String _peso = this.txtPeso.getText();
 		int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
-		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) +1;
-		float _carga = Float.parseFloat(this.txtCarga.getText());
+		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
 		String _descripcion = this.txtpDescrpcion.getText();
-		boolean _estado = this.chbEstado.isSelected();
-		int _id =adaptador.guardarLavarropas(_estado, _precioBase, _peso, _colorID, _consumoID, _descripcion, _carga);
-		String mensaje = String.format("Item Correctamente Cargado \nID: %s \nDescripcion: %s \n"
-				+ "Precio Base: %s \nPeso: %s \nColor: %s \nConsumo: %s\nEstado: %s\nCarga: %s", 
-				"Lavarropas",_id, _descripcion, _precioBase, _peso, _colorID, _consumoID, _estado, _carga);
-		JOptionPane.showMessageDialog(this.frame, mensaje, "Titulo", 1);
+		String _carga = this.txtCarga.getText();
+		if (_precioBase.equals("") || _peso.equals("") || _descripcion.equals("") || _carga.equals(""))
+		{
+			int a = JOptionPane.showConfirmDialog(this.frame, "Desea Autocompletar campos vacios /n con valores por defecto?","Autocompletar", JOptionPane.YES_NO_OPTION);
+			if(a == 0)
+			{
+				confirmarLavarropas(adaptador, _precioBase, _peso, _colorID,
+						_consumoID, _descripcion, _carga);
+			}
+		}
+		else
+		{
+			confirmarLavarropas(adaptador, _precioBase, _peso, _colorID,
+					_consumoID, _descripcion, _carga);
+		}
+	}
+
+	private void confirmarLavarropas(Logica_Lavarropas adaptador,
+			String _precioBase, String _peso, int _colorID, int _consumoID,
+			String _descripcion, String _carga) {
+			int _id = adaptador.guardarLavarropas(_precioBase, _peso, _colorID, _consumoID, _descripcion, _carga);
+			Electrodomestico lav = adaptador.obtenerItem(_id);
+			String mensaje = String.format("Item Correctamente Cargado \n%s\nID: %s \nDescripcion: %s \n"
+					+ "Precio Base: %s \nPeso: %s \nColor: %s \nConsumo: %s\n"
+					+ "Resolucion: %s \nSintonizador: %s\n", 
+					"Television", lav.getID(), lav.getDescripcion(), lav.getPrecio_base(), lav.getPeso(), colores.get(lav.getColorID()-1) , consumos.get(lav.getConsumoID()-1), ((Lavarropas)lav).getCarga());
+			JOptionPane.showMessageDialog(this.frame, mensaje, "Titulo", 1);
+			this.frame.setVisible(false);
 	}
 	
 	private void guardarTelevision()
 	{
 		Logica_Televisor adaptador = new Logica_Televisor();
-		float _precioBase = Float.parseFloat(this.txtPrecioBase.getText());
-		float _peso = Float.parseFloat(this.txtPeso.getText());
+		String _precioBase = this.txtPrecioBase.getText();
+		String _peso = this.txtPeso.getText();
 		int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
 		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
 		String _descripcion = this.txtpDescrpcion.getText();
-		boolean _estado = this.chbEstado.isSelected();
-		int _resolucion = Integer.parseInt(this.txtResolucion.getText());
+		String _resolucion = this.txtResolucion.getText();
 		boolean _sinTDT = this.chbSintonizadorTDT.isSelected();
-		int _id = adaptador.guardarTelevisor(_estado, _precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sinTDT);
+		if (_precioBase.equals("") || _peso.equals("") || _descripcion.equals("") || _resolucion.equals(""))
+		{
+			int a = JOptionPane.showConfirmDialog(this.frame, "Desea Autocompletar campos vacios con valores por defecto?","Autocompletar", JOptionPane.YES_NO_OPTION);
+			if(a == 0)
+			{
+				confirmarTelevision(adaptador, _precioBase, _peso, _colorID,
+						_consumoID, _descripcion, _resolucion, _sinTDT);
+			}
+		}
+		else
+			{
+				confirmarTelevision(adaptador, _precioBase, _peso, _colorID,
+						_consumoID, _descripcion, _resolucion, _sinTDT);
+			}
+	}
+
+	private void confirmarTelevision(Logica_Televisor adaptador,
+			String _precioBase, String _peso, int _colorID, int _consumoID,
+			String _descripcion, String _resolucion, boolean _sinTDT) {
+		int _id = adaptador.guardarTelevision(_precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sinTDT);
+		Electrodomestico tel = adaptador.obtenerItem(_id);
 		String mensaje = String.format("Item Correctamente Cargado \n%s\nID: %s \nDescripcion: %s \n"
-				+ "Precio Base: %s \nPeso: %s \nColor: %s \nConsumo: %s\nEstado: %s\n"
+				+ "Precio Base: %s \nPeso: %s \nColor: %s \nConsumo: %s\n"
 				+ "Resolucion: %s \nSintonizador: %s\n", 
-				"Television", _id, _descripcion, _precioBase, _peso, (String)this.cboxColores.getSelectedItem(), (String)this.cboxConsEner.getSelectedItem(), _estado, _resolucion, _sinTDT);
+				"Television", tel.getID(), tel.getDescripcion(), tel.getPrecio_base(), tel.getPeso(), colores.get(tel.getColorID()-1) , consumos.get(tel.getConsumoID()-1), ((Television)tel).getResolucion(), ((Television)tel).isSinTDT());
 		JOptionPane.showMessageDialog(this.frame, mensaje, "Titulo", 1);
+		this.frame.setVisible(false);
 	}
 	
 	private void guardarElectrodomestico()
@@ -300,7 +345,6 @@ public class JfrmAlta {
 			this.guardarLavarropas();
 		if(this.rbtnTelevision.isSelected())
 			this.guardarTelevision();
-		this.frame.setVisible(false);
 	}
 	
 	private void activarElementosLavarropas() {
@@ -347,10 +391,9 @@ public class JfrmAlta {
 		int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
 		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
 		String _descripcion = this.txtpDescrpcion.getText();
-		boolean _estado = this.chbEstado.isSelected();
 		int _resolucion = Integer.parseInt(this.txtResolucion.getText());
 		boolean _sinTDT = this.chbSintonizadorTDT.isSelected();
-		adaptador.actualizarTelevisor(_Id, _estado, _precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sinTDT);
+		adaptador.actualizarTelevisor(_Id, _precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sinTDT);
 		this.frame.setVisible(false);
 	}
 
@@ -362,9 +405,8 @@ public class JfrmAlta {
 		int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
 		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
 		String _descripcion = this.txtpDescrpcion.getText();
-		boolean _estado = this.chbEstado.isSelected();
 		float _carga = Float.parseFloat(this.txtCarga.getText());
-		adaptador.actualizarLavarropas(_Id, _estado, _precioBase, _peso, _colorID, _consumoID, _descripcion, _carga);
+		adaptador.actualizarLavarropas(_Id, _precioBase, _peso, _colorID, _consumoID, _descripcion, _carga);
 		this.frame.setVisible(false);
 	}
 }

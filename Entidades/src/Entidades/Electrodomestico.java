@@ -10,49 +10,34 @@ public abstract class Electrodomestico {
 	private float peso;
 	private String descripcion;
 	private int ID;
-	private boolean estado;
 	
-	static public int siguienteID;
-	static final int colorID_defecto = 1;
-	static final String colorDesc_defecto = "blanco";
-	static final float precio_base_defecto = 100;
-	static final int consumoID_defecto = 1;
-	static final float peso_defecto = 5;
-	static final boolean estado_defecto = true;
-	static final String descripcion_defecto = "sin descripcion";
+	static final public int colorID_defecto = 1;
+	static final public String colorDesc_defecto = "blanco";
+	static final public float precio_base_defecto = 100;
+	static final public int consumoID_defecto = 1;
+	static final public float peso_defecto = 5;
+	static final public String descripcion_defecto = "sin descripcion";
 	
-	public Electrodomestico (boolean _estado, float _precio_base,float _peso , int _colorID, int _consumoID, String _descripcion)
+	public Electrodomestico (float _precio_base,float _peso , int _colorID, int _consumoID, String _descripcion)
 	{
 		this.precio_base = _precio_base;
 		this.colorID = _colorID;
 		this.consumoID = _consumoID;
 		this.peso = _peso;
-		this.ID = Electrodomestico.siguienteID;
 		this.descripcion = _descripcion;
-		this.estado = _estado;
 		
 	}
 	
 	
 	public Electrodomestico () 
 	{
-		this(estado_defecto, precio_base_defecto, peso_defecto, colorID_defecto, consumoID_defecto, descripcion_defecto);
+		this( precio_base_defecto, peso_defecto, colorID_defecto, consumoID_defecto, descripcion_defecto);
 		
 	}
 	
 	public Electrodomestico (float _precio_base, float _peso) 
 	{
-		this(estado_defecto, _precio_base, _peso, colorID_defecto, consumoID_defecto, descripcion_defecto);
-	}
-	
-
-	public boolean getEstado() {
-		return estado;
-	}
-
-
-	public void setEstado(boolean estado) {
-		this.estado = estado;
+		this( _precio_base, _peso, colorID_defecto, consumoID_defecto, descripcion_defecto);
 	}
 	
 	public String getDescripcion() {

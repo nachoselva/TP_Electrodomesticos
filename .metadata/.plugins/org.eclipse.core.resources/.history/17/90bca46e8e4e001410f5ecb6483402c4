@@ -1,0 +1,63 @@
+package Logica;
+
+import java.util.ArrayList;
+
+import AccesoDatos.AccesoDatos_Electrodomestico;
+import Entities.Electrodomestico;
+
+public class Logica_Electrodomestico {
+	
+	public ArrayList<Electrodomestico> ObtenerTodos()
+	{
+		AccesoDatos_Electrodomestico adaptador = new AccesoDatos_Electrodomestico();
+		return adaptador.ObtenerTodos();
+	}
+	
+	public void borrarItem(int _Id)
+	{
+		AccesoDatos_Electrodomestico adaptador = new AccesoDatos_Electrodomestico();
+		adaptador.borrarItem(_Id);
+	}
+	
+	public ArrayList<String> getTodosConsumos()
+	{
+		return new AccesoDatos_Electrodomestico().getTodosConsumos();
+	}
+	
+	public ArrayList<String> getTodosColores()
+	{
+		return new AccesoDatos_Electrodomestico().getTodosColores();
+	}
+	
+	public Electrodomestico obtenerItem(int _Id)
+	{
+		return new AccesoDatos_Electrodomestico().obtenerItem(_Id);
+	}
+
+	public float getRecargoPorConsumo(int consumoID) {
+
+		return new AccesoDatos_Electrodomestico().getRecargoPorConsumo(consumoID);
+	}
+
+	public float getRecargoPorPeso(float peso) {
+		float acum = 0;
+		if(peso<19)
+		{
+			acum = 10;
+		}
+		else if (peso <49)
+		{
+			acum = 50;
+		}
+		else if (peso < 80)
+		{
+			acum = 80;
+		}
+		else
+		{
+			acum = 100;
+		}
+		return acum;
+	}
+
+}

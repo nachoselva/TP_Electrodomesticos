@@ -3,7 +3,7 @@ package Logica;
 import java.util.ArrayList;
 
 import AccesoDatos.AccesoDatos_Electrodomestico;
-import Entidades.Electrodomestico;
+import Entities.Electrodomestico;
 
 public class Logica_Electrodomestico {
 	
@@ -32,6 +32,32 @@ public class Logica_Electrodomestico {
 	public Electrodomestico obtenerItem(int _Id)
 	{
 		return new AccesoDatos_Electrodomestico().obtenerItem(_Id);
+	}
+
+	public float getRecargoPorConsumo(int consumoID) {
+		float a = new AccesoDatos_Electrodomestico().getRecargoPorConsumo(consumoID);
+		return a;
+	}
+
+	public float getRecargoPorPeso(float peso) {
+		float acum = 0;
+		if(peso<19)
+		{
+			acum = 10;
+		}
+		else if (peso <49)
+		{
+			acum = 50;
+		}
+		else if (peso < 80)
+		{
+			acum = 80;
+		}
+		else
+		{
+			acum = 100;
+		}
+		return acum;
 	}
 
 }

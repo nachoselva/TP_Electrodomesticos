@@ -1,0 +1,144 @@
+package Ventanas;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTable;
+
+import Entities.Electrodomestico;
+import Logica.CustomDataModel;
+import Logica.Logica_Electrodomestico;
+
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+
+public class JfrmLista{
+
+	public JFrame frmElectrodomesticos;
+	private JTable tblListado;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JfrmLista window = new JfrmLista();
+					window.frmElectrodomesticos.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public JfrmLista() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmElectrodomesticos = new JFrame();
+		frmElectrodomesticos.setTitle("Electrodomesticos");
+		frmElectrodomesticos.setBounds(100, 100, 736, 460);
+		frmElectrodomesticos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmElectrodomesticos.getContentPane().setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(37, 139, 640, 234);
+		frmElectrodomesticos.getContentPane().add(scrollPane);
+		tblListado = new JTable();
+		tblListado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		scrollPane.setViewportView(tblListado);
+		
+		JButton btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				modificarLavarropas();
+			}
+		});
+		btnModificar.setBounds(325, 387, 89, 23);
+		frmElectrodomesticos.getContentPane().add(btnModificar);
+		
+		JButton btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				borrarElemento();
+			}
+		});
+		btnBorrar.setBounds(576, 387, 89, 23);
+		frmElectrodomesticos.getContentPane().add(btnBorrar);
+		
+		JButton btnAlta = new JButton("Alta");
+		btnAlta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JfrmAlta ventana = new JfrmAlta();
+				ventana.frame.setVisible(true);
+			}
+		});
+		btnAlta.setBounds(79, 387, 89, 23);
+		frmElectrodomesticos.getContentPane().add(btnAlta);
+		
+		JButton btnActualizar = new JButton("Actualizar");
+		btnActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cargarTabla();
+			}
+		});
+		btnActualizar.setBounds(37, 33, 100, 28);
+		frmElectrodomesticos.getContentPane().add(btnActualizar);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(175, 21, 46, 14);
+		frmElectrodomesticos.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(175, 53, 46, 14);
+		frmElectrodomesticos.getContentPane().add(lblNewLabel_1);
+	}
+	
+	private void cargarTabla()
+	{
+		CustomDataModel DataModel = new CustomDataModel();
+		ArrayList<Electrodomestico> a = new Logica_Electrodomestico().ObtenerTodos();
+		DataModel.setLista(a);
+		tblListado.setModel(DataModel); 
+	}
+	
+	private void borrarElemento() {
+		Logica_Electrodomestico adaptador = new Logica_Electrodomestico();
+		int _SelectedRow = tblListado.getSelectedRow();
+		if(_SelectedRow != -1)
+		{
+		int _Id = (int)tblListado.getValueAt(_SelectedRow , 1);
+		adaptador.borrarItem(_Id);
+		this.cargarTabla();
+		}
+	}
+	
+	private void modificarLavarropas()
+	{
+		int _SelectedRow = tblListado.getSelectedRow();
+		if(_SelectedRow != -1)
+		{
+		int _Id = (int)tblListado.getValueAt(_SelectedRow , 1);
+		JfrmAlta ventana = new JfrmAlta(_Id);
+		ventana.frame.setVisible(true);
+		this.cargarTabla();
+		}
+		
+	}
+}

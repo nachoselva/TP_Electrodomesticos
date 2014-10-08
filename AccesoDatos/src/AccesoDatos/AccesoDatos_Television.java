@@ -3,7 +3,7 @@ package AccesoDatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import Entidades.Television;
+import Entities.Television;
 
 public class AccesoDatos_Television extends AccesoDatos_Electrodomestico{
 	public int GuardarElectrodomestico(Television item)

@@ -3,7 +3,7 @@ package AccesoDatos;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import Entidades.Lavarropas;
+import Entities.Lavarropas;
 
 public class AccesoDatos_Lavarropas extends AccesoDatos_Electrodomestico{
 	public int GuardarElectrodomestico(Lavarropas item)

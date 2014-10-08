@@ -1,7 +1,9 @@
 package Logica;
+import AccesoDatos.AccesoDatos_Lavarropas;
 import AccesoDatos.AccesoDatos_Television;
-import Entidades.Electrodomestico;
-import Entidades.Television;
+import Entities.Electrodomestico;
+import Entities.Lavarropas;
+import Entities.Television;
 
 public class Logica_Televisor  extends Logica_Electrodomestico{
 	
@@ -66,5 +68,32 @@ public class Logica_Televisor  extends Logica_Electrodomestico{
 		_sintonizador = _sintonizador_valor;
 		Television lav = new Television(_precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sintonizador);
 		return adaptador.GuardarElectrodomestico(lav);
+	}
+	
+	public Television obtenerTelevisor(int ID)
+	{
+		AccesoDatos_Television adaptador = new AccesoDatos_Television();
+		return adaptador.ObtenerTelevision(ID);
+	}
+	
+	public float getRecargoPorResolucionYSint(int res, boolean sint, float price)
+	{
+		float _precio = 0;
+		if (res > 40)
+		{
+			_precio += price*(3/10);
+		}
+		if (sint)
+		{
+			_precio += 50;
+		}
+		return _precio;
+	}
+	
+	public float calcularPrecioFinal(int ID)
+	{
+		Television tel = this.obtenerTelevisor(ID);
+		return tel.getPrecio_base()+this.getRecargoPorResolucionYSint(tel.getResolucion(), tel.isSinTDT(), tel.getPrecio_base())+ 
+				this.getRecargoPorPeso(tel.getPeso()) + this.getRecargoPorConsumo(tel.getID());
 	}
 }

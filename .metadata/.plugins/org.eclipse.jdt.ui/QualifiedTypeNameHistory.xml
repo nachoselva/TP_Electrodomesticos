@@ -11,18 +11,19 @@
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="Entidades.Electrodomestico.Colores"/>
 <fullyQualifiedTypeName name="Ventanas.JfrmAlta"/>
-<fullyQualifiedTypeName name="Logica.Logica_Televisor"/>
-<fullyQualifiedTypeName name="javax.swing.JFrame"/>
 <fullyQualifiedTypeName name="Ventanas.JfrmLista"/>
-<fullyQualifiedTypeName name="Logica.Logica_Lavarropas"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="java.sql.Statement"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Television"/>
-<fullyQualifiedTypeName name="Logica.Logica_Electrodomestico"/>
-<fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Electrodomestico"/>
 <fullyQualifiedTypeName name="Entidades.Television"/>
-<fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Lavarropas"/>
 <fullyQualifiedTypeName name="Entidades.Lavarropas"/>
 <fullyQualifiedTypeName name="Entidades.Electrodomestico"/>
+<fullyQualifiedTypeName name="javax.swing.JFrame"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Electrodomestico"/>
+<fullyQualifiedTypeName name="Logica.Logica_Electrodomestico"/>
+<fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Lavarropas"/>
+<fullyQualifiedTypeName name="Logica.Logica_Televisor"/>
+<fullyQualifiedTypeName name="Logica.Logica_Lavarropas"/>
 </qualifiedTypeNameHistroy>

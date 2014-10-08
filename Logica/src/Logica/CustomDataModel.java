@@ -3,7 +3,8 @@ package Logica;
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
-import Entidades.*;
+import Entities.*;
+import AccesoDatos.*;
 
 public class CustomDataModel extends AbstractTableModel{
 	
@@ -32,18 +33,19 @@ public class CustomDataModel extends AbstractTableModel{
 	@Override
 	public Object getValueAt(int arg0, int arg1) {
 		Electrodomestico item = Lista.get(arg0);
-		Object campo;
+		AccesoDatos_Electrodomestico adaptador = new AccesoDatos_Electrodomestico();
+		Object campo = null;
 		switch(arg1)
 		{
 		case 0: {
 				campo = item.getClass();
 				if (item.getClass() == Television.class)
 				{
-					campo = "Television";
+					campo = "Tv";
 				}
 				if (item.getClass() == Lavarropas.class)
 				{
-					campo = "Lavarropas";
+					campo = "Lav";
 				}
 				}
 				break;
@@ -51,11 +53,23 @@ public class CustomDataModel extends AbstractTableModel{
 				break;
 		case 2: campo = item.getDescripcion();
 				break;
-		case 3: campo = item.getPrecio_base();
+		case 3: 
+			{
+				if (item.getClass() == Television.class)
+				{
+				Logica_Televisor tel = new Logica_Televisor();
+				campo = tel.calcularPrecioFinal(item.getID());
+				}
+				if (item.getClass() == Lavarropas.class)
+				{
+					Logica_Lavarropas tel = new Logica_Lavarropas();
+					campo = tel.calcularPrecioFinal(item.getID());
+				}
+			}
 				break;
-		case 4: campo = item.getConsumoID();
+		case 4: campo = adaptador.getConsumoDesc(item.getConsumoID());
 				break;
-		case 5: campo = item.getColorID();
+		case 5: campo = adaptador.getColorDesc(item.getColorID());
 				break;
 		case 6: campo = item.getPeso();
 				break;
@@ -101,14 +115,14 @@ public class CustomDataModel extends AbstractTableModel{
 		case 0: name = "Clase";
 				break;
 		case 1: name = "ID";
-				break;
+		break;
 		case 2: name = "Descripcion";
 				break;
-		case 3: name = "Precio Base";
+		case 3: name = "Precio";
 				break;
-		case 4: name = "ConsumoID";
+		case 4: name = "Consumo";
 				break;
-		case 5: name = "ColorID";
+		case 5: name = "Color";
 				break;
 		case 6: name = "Peso";
 				break;

@@ -52,12 +52,7 @@ public class JfrmAlta {
 	 * Launch the application.
 	 */
 	
-	/**
-	 * Create the application.
-	 */
-	/**
-		 * @wbp.parser.constructor
-		 */
+
 
 	public JfrmAlta() {
 		
@@ -75,7 +70,12 @@ public class JfrmAlta {
 		this.btnAlta.setEnabled(true);
 	}
 
-
+	/**
+	 * Create the application.
+	 */
+	/**
+		 * @wbp.parser.constructor
+		 */
 	
 	public JfrmAlta(int _Id) {
 		
@@ -261,7 +261,7 @@ public class JfrmAlta {
 		String _carga = this.txtCarga.getText();
 		if (_precioBase.equals("") || _peso.equals("") || _descripcion.equals("") || _carga.equals(""))
 		{
-			int a = JOptionPane.showConfirmDialog(this.frame, "Desea Autocompletar campos vacios con valores por defecto?","Autocompletar", JOptionPane.YES_NO_OPTION);
+			int a = JOptionPane.showConfirmDialog(this.frame, "Desea Autocompletar campos vacios /n con valores por defecto?","Autocompletar", JOptionPane.YES_NO_OPTION);
 			if(a == 0)
 			{
 				if (this.verificarFormato())

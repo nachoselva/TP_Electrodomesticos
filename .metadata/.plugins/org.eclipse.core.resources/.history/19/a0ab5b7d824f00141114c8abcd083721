@@ -14,7 +14,6 @@ import Logica.Logica_Lavarropas;
 import Logica.Logica_Televisor;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JButton;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
@@ -176,7 +174,9 @@ public class JfrmLista{
 		JButton btnFiltrar = new JButton("Filtrar");
 		btnFiltrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				filtrar_completo();
+				recargarDatos();
+				filtrarTabla();
+				cargarTabla();
 			}
 		});
 		btnFiltrar.setBounds(37, 72, 100, 37);
@@ -271,6 +271,7 @@ public class JfrmLista{
 		JfrmAlta ventana = new JfrmAlta(_Id);
 		ventana.frame.setVisible(true);
 		}
+		
 	}
 	
 	private void recargarDatos()
@@ -279,38 +280,5 @@ public class JfrmLista{
 		ListadoParcial = new ArrayList<Electrodomestico>();
 		ListadoParcial.addAll(ListadoEntero);
 		this.cargarTabla();
-	}
-	
-	private boolean verificarFormato()
-	{
-		boolean bandera;
-		try
-		{
-			if(!this.txtPrecioMax.getText().isEmpty())
-			{
-				Float.parseFloat(this.txtPrecioMax.getText());
-			}
-			if(!this.txtPrecioMin.getText().isEmpty())
-			{
-				Float.parseFloat(this.txtPrecioMin.getText());
-			}
-			bandera = true;
-		}
-		catch (Exception e)
-		{
-			bandera = false;
-			JOptionPane.showMessageDialog(this.frmElectrodomesticos, "Verificar Formatos de Entrada", "ERROR", 2 );
-		}
-		return bandera;
-	}
-	
-	private void filtrar_completo()
-	{
-		if(verificarFormato())
-		{
-		recargarDatos();
-		filtrarTabla();
-		cargarTabla();
-		}
 	}
 }

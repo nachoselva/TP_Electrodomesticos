@@ -6,7 +6,6 @@
 <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
 <fullyQualifiedTypeName name="javax.swing.table.AbstractTableModel"/>
 <fullyQualifiedTypeName name="Logica.CustomDataModel"/>
-<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 <fullyQualifiedTypeName name="Entidades.Electrodomestico.Tipos_Consumo"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="Entidades.Electrodomestico.Colores"/>
@@ -14,7 +13,6 @@
 <fullyQualifiedTypeName name="Ventanas.JfrmLista"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="java.sql.Statement"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Television"/>
 <fullyQualifiedTypeName name="Entidades.Television"/>
 <fullyQualifiedTypeName name="Entidades.Lavarropas"/>
@@ -22,8 +20,14 @@
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Electrodomestico"/>
-<fullyQualifiedTypeName name="Logica.Logica_Electrodomestico"/>
 <fullyQualifiedTypeName name="AccesoDatos.AccesoDatos_Lavarropas"/>
 <fullyQualifiedTypeName name="Logica.Logica_Televisor"/>
+<fullyQualifiedTypeName name="Entities.Consumo"/>
+<fullyQualifiedTypeName name="Entities.Lavarropas"/>
 <fullyQualifiedTypeName name="Logica.Logica_Lavarropas"/>
+<fullyQualifiedTypeName name="Entities.Television"/>
+<fullyQualifiedTypeName name="javax.swing.DefaultComboBoxModel"/>
+<fullyQualifiedTypeName name="Logica.Logica_Electrodomestico"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
 </qualifiedTypeNameHistroy>

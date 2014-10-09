@@ -52,13 +52,13 @@ public class JfrmAlta {
 	 * Launch the application.
 	 */
 	
+
 	/**
 	 * Create the application.
 	 */
 	/**
 		 * @wbp.parser.constructor
 		 */
-
 	public JfrmAlta() {
 		
 		initialize();
@@ -74,8 +74,6 @@ public class JfrmAlta {
 		frame.getContentPane().add(btnAlta);
 		this.btnAlta.setEnabled(true);
 	}
-
-
 	
 	public JfrmAlta(int _Id) {
 		
@@ -261,7 +259,7 @@ public class JfrmAlta {
 		String _carga = this.txtCarga.getText();
 		if (_precioBase.equals("") || _peso.equals("") || _descripcion.equals("") || _carga.equals(""))
 		{
-			int a = JOptionPane.showConfirmDialog(this.frame, "Desea Autocompletar campos vacios con valores por defecto?","Autocompletar", JOptionPane.YES_NO_OPTION);
+			int a = JOptionPane.showConfirmDialog(this.frame, "Desea Autocompletar campos vacios /n con valores por defecto?","Autocompletar", JOptionPane.YES_NO_OPTION);
 			if(a == 0)
 			{
 				if (this.verificarFormato())
@@ -351,27 +349,15 @@ public class JfrmAlta {
 		boolean bandera;
 		try
 		{
-			if(!this.txtPrecioBase.getText().isEmpty())
-			{
-				Float.parseFloat(this.txtPrecioBase.getText());
-			}
-			if(!this.txtPeso.getText().isEmpty())
-			{
-				Float.parseFloat(this.txtPeso.getText());
-			}
+			Float.parseFloat(this.txtPrecioBase.getText());
+			Float.parseFloat(this.txtPeso.getText());
 			if (this.rbtnTelevision.isSelected())
 			{
-				if (!this.txtResolucion.getText().isEmpty())
-					{
-					Integer.parseInt(this.txtResolucion.getText());
-					}
+				Integer.parseInt(this.txtResolucion.getText());
 			}
 			else if (this.rbtnLavarropas.isSelected())
 			{
-				if(!this.txtCarga.getText().isEmpty())
-				{
-					Float.parseFloat(this.txtCarga.getText());
-				}
+			Float.parseFloat(this.txtCarga.getText());
 			}
 			bandera = true;
 		}
@@ -418,38 +404,29 @@ public class JfrmAlta {
 	}
 
 	private void actualizarTelevisor() {
-		if (this.verificarFormato())
-		{
-			Logica_Televisor adaptador = new Logica_Televisor();
-			int _Id = Integer.parseInt(this.txtID.getText());
-			float _precioBase = Float.parseFloat(this.txtPrecioBase.getText());
-			float _peso = Float.parseFloat(this.txtPeso.getText());
-			int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
-			int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
-			String _descripcion = this.txtpDescrpcion.getText();
-			int _resolucion = Integer.parseInt(this.txtResolucion.getText());
-			boolean _sinTDT = this.chbSintonizadorTDT.isSelected();
-			adaptador.actualizarTelevisor(_Id, _precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sinTDT);
-			this.frame.setVisible(false);
-		}
+		Logica_Televisor adaptador = new Logica_Televisor();
+		int _Id = Integer.parseInt(this.txtID.getText());
+		float _precioBase = Float.parseFloat(this.txtPrecioBase.getText());
+		float _peso = Float.parseFloat(this.txtPeso.getText());
+		int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
+		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
+		String _descripcion = this.txtpDescrpcion.getText();
+		int _resolucion = Integer.parseInt(this.txtResolucion.getText());
+		boolean _sinTDT = this.chbSintonizadorTDT.isSelected();
+		adaptador.actualizarTelevisor(_Id, _precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sinTDT);
+		this.frame.setVisible(false);
 	}
 
 	private void actualizarLavarropas() {
-		{
-		if (this.verificarFormato())
-		{
-			Logica_Lavarropas adaptador = new Logica_Lavarropas();
-			int _Id = Integer.parseInt(this.txtID.getText());
-			float _precioBase = Float.parseFloat(this.txtPrecioBase.getText());
-			float _peso = Float.parseFloat(this.txtPeso.getText());
-			int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
-			int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
-			String _descripcion = this.txtpDescrpcion.getText();
-			float _carga = Float.parseFloat(this.txtCarga.getText());
-			if (this.verificarFormato())
-			adaptador.actualizarLavarropas(_Id, _precioBase, _peso, _colorID, _consumoID, _descripcion, _carga);
-			this.frame.setVisible(false);
-		}
-		}
+		Logica_Lavarropas adaptador = new Logica_Lavarropas();
+		int _Id = Integer.parseInt(this.txtID.getText());
+		float _precioBase = Float.parseFloat(this.txtPrecioBase.getText());
+		float _peso = Float.parseFloat(this.txtPeso.getText());
+		int _colorID = colores.indexOf((String)this.cboxColores.getSelectedItem()) + 1;
+		int _consumoID = consumos.indexOf((String)this.cboxConsEner.getSelectedItem()) + 1;
+		String _descripcion = this.txtpDescrpcion.getText();
+		float _carga = Float.parseFloat(this.txtCarga.getText());
+		adaptador.actualizarLavarropas(_Id, _precioBase, _peso, _colorID, _consumoID, _descripcion, _carga);
+		this.frame.setVisible(false);
 	}
 }

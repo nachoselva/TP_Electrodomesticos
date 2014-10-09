@@ -1,6 +1,8 @@
 package Logica;
+import AccesoDatos.AccesoDatos_Lavarropas;
 import AccesoDatos.AccesoDatos_Television;
 import Entities.Electrodomestico;
+import Entities.Lavarropas;
 import Entities.Television;
 
 public class Logica_Televisor  extends Logica_Electrodomestico{
@@ -64,8 +66,8 @@ public class Logica_Televisor  extends Logica_Electrodomestico{
 			_resolucion = Television.resolucion_defecto;
 		}
 		_sintonizador = _sintonizador_valor;
-		Television tel = new Television(_precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sintonizador);
-		return adaptador.GuardarElectrodomestico(tel);
+		Television lav = new Television(_precioBase, _peso, _colorID, _consumoID, _descripcion, _resolucion, _sintonizador);
+		return adaptador.GuardarElectrodomestico(lav);
 	}
 	
 	public Television obtenerTelevisor(int ID)

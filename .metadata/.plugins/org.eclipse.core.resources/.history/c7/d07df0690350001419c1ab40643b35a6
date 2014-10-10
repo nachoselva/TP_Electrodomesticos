@@ -29,8 +29,6 @@ import javax.swing.JComboBox;
 
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class JfrmLista{
 
@@ -139,12 +137,6 @@ public class JfrmLista{
 		frmElectrodomesticos.getContentPane().add(lblPriceMax);
 		
 		txtPrecioMin = new JTextField();
-		txtPrecioMin.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-
-			}
-		});
 		txtPrecioMin.setBounds(244, 8, 86, 20);
 		frmElectrodomesticos.getContentPane().add(txtPrecioMin);
 		txtPrecioMin.setColumns(10);

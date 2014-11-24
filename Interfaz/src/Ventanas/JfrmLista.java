@@ -131,17 +131,21 @@ public class JfrmLista{
 		frmElectrodomesticos.getContentPane().add(btnActualizar);
 		
 		JLabel lblPrecioMin = new JLabel("Precio Min");
-		lblPrecioMin.setBounds(171, 11, 63, 14);
+		lblPrecioMin.setBounds(147, 11, 84, 14);
 		frmElectrodomesticos.getContentPane().add(lblPrecioMin);
 		
 		JLabel lblPriceMax = new JLabel("Precio Max");
-		lblPriceMax.setBounds(171, 40, 63, 14);
+		lblPriceMax.setBounds(147, 40, 87, 14);
 		frmElectrodomesticos.getContentPane().add(lblPriceMax);
 		
 		txtPrecioMin = new JTextField();
 		txtPrecioMin.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == 10)
+				{
+					filtrar_completo();
+				}
 
 			}
 		});
@@ -150,6 +154,15 @@ public class JfrmLista{
 		txtPrecioMin.setColumns(10);
 		
 		txtPrecioMax = new JTextField();
+		txtPrecioMax.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == 10)
+				{
+					filtrar_completo();
+				}
+			}
+		});
 		txtPrecioMax.setBounds(244, 37, 86, 20);
 		frmElectrodomesticos.getContentPane().add(txtPrecioMax);
 		txtPrecioMax.setColumns(10);

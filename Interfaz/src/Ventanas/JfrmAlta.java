@@ -216,27 +216,27 @@ public class JfrmAlta {
 		frame.getContentPane().add(cboxConsEner);
 		
 		JLabel lblPrecioBase = new JLabel("Precio Base");
-		lblPrecioBase.setBounds(10, 84, 55, 14);
+		lblPrecioBase.setBounds(10, 84, 87, 14);
 		frame.getContentPane().add(lblPrecioBase);
 		
 		JLabel lblNewLabel_3 = new JLabel("Peso");
-		lblNewLabel_3.setBounds(10, 151, 46, 14);
+		lblNewLabel_3.setBounds(10, 151, 87, 14);
 		frame.getContentPane().add(lblNewLabel_3);
 		
 		JLabel lblColor = new JLabel("Color");
-		lblColor.setBounds(10, 206, 46, 14);
+		lblColor.setBounds(10, 206, 87, 14);
 		frame.getContentPane().add(lblColor);
 		
 		JLabel lblConsumo = new JLabel("Consumo");
-		lblConsumo.setBounds(10, 260, 46, 14);
+		lblConsumo.setBounds(10, 260, 87, 14);
 		frame.getContentPane().add(lblConsumo);
 		
 		JLabel lblResolucion = new JLabel("Resolucion");
-		lblResolucion.setBounds(219, 151, 55, 14);
+		lblResolucion.setBounds(219, 151, 75, 14);
 		frame.getContentPane().add(lblResolucion);
 		
 		JLabel lblCarga = new JLabel("Carga");
-		lblCarga.setBounds(219, 81, 46, 14);
+		lblCarga.setBounds(219, 81, 75, 14);
 		frame.getContentPane().add(lblCarga);
 		
 		txtpDescrpcion = new JTextPane();

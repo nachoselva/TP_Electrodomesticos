@@ -1,0 +1,78 @@
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>ABM Electrodomesticos</title>	
+</head>
+<body>
+	<div>
+		<div>
+			<div>
+					<button id="btnActualizar" name="botonComun"
+						class="btn btn-primary btn-block">Actualizar</button>
+			</div>
+			<div>
+				<p class="text-center h4">Precio Minimo</p>
+			</div>
+			<div>
+					<input id="txtPrecioMin" name="cajaTextoComun" type="text" class="form-control">
+			</div>
+			<div>
+				<p class="text-center h4">Precio Maximo</p> 
+			</div>
+			<div>
+					<input id="txtPrecioMax" name="cajaTextoComun" type="text" class="form-control">
+			</div>
+		</div>
+		<div>
+			<div>
+					<button id="btnFiltrar" name="botonComun"
+						class="btn btn-primary btn-block">Filtrar</button>
+			</div>
+			<div>
+				<p class="text-center h4">Consumo</p>
+			</div>
+			<div>
+				 	<select>
+          				<%
+          					
+          					ArrayList<String> colores = new ArrayList<String>();
+          					colores.add("rojo");
+          					colores.add("verde");
+          					//(ArrayList<String>)request.getAttribute("colores");
+          					
+          					for(int x=0; x<colores.size(); x++)	{ %>
+          						<option><%=colores.get(x) %></option>
+          				<%	}%>
+     				 </select>
+			</div>
+			<div>
+				<p>Color</p>
+			</div>
+			<div> 
+					<select>
+          				<option>Mustard</option>
+          				<option>Ketchup</option>
+          				<option>Relish</option>
+     				 </select>
+			</div>
+		</div>
+		<div>
+			<h4>Aqui va la tabla con datos</h4>
+		</div>
+		<div>
+			<div>
+				<button id="btnAlta" name="botonComun">Alta</button>
+			</div>
+			<div>
+				<button id="btnBaja" name="botonComun">Baja</button>
+			</div>
+			<div>
+				<button id="btnModificacion" name="botonComun">Modificacion</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -2,7 +2,15 @@
     <wb-module deploy-name="Web">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/" source-path="/WebContent/WEB-INF/classes"/>
+        <dependent-module archiveName="AccesoDatos.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/AccesoDatos/AccesoDatos">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Logica.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Logica/Logica">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Entidades.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Entidades/Entidades">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="Web"/>
         <property name="java-output-path" value="/Web/build/classes"/>
     </wb-module>

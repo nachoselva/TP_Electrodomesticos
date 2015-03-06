@@ -3,6 +3,9 @@
 	<name>Web</name>
 	<comment></comment>
 	<projects>
+		<project>AccesoDatos</project>
+		<project>Entidades</project>
+		<project>Logica</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

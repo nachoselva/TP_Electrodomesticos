@@ -59,5 +59,20 @@ public class Logica_Electrodomestico {
 		}
 		return acum;
 	}
+	
+
+		public String getConsumoDesc(int ConsID)
+		{
+			AccesoDatos_Electrodomestico adaptador = new AccesoDatos_Electrodomestico();
+			return adaptador.getConsumoDesc(ConsID);
+		}
+		
+		public String getColorDesc(int ColorID)
+		{
+			AccesoDatos_Electrodomestico adaptador = new AccesoDatos_Electrodomestico();
+			return adaptador.getColorDesc(ColorID);
+		}
+		
+		
 
 }

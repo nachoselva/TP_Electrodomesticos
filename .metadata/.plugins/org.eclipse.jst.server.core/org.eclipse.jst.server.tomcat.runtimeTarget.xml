@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<classpath>
+  <source-attachment entry="D:/Apache/lib/catalina.jar" runtime-id="servidor java" source-attachment-path="/AccesoDatos/src/mysql-connector-java-5.0.8-bin.jar"/>
+</classpath>
